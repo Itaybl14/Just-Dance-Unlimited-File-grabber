@@ -3,8 +3,14 @@ import requests
 def jdurequest(link):
     headers = {"X-SkuId":skuid,"Authorization":f"Ubi_v1 {ticket}"}
     j = requests.get(link, headers=headers)
-    json = j.json()
-    return json
+    if j.status_code != 200:
+        import time
+        print(f"[{j.status_code}] something went wrong while getting a request from prod.")
+        time.sleep(5)
+        exit()
+    else:
+        json = j.json()
+        return json
 
 print("\n----------\nJust Dance Unlimited tools by Itay\nCredits: Ron (todoroki)\n----------\nOptions:\n1 - Get ticket\n2 - Get SongDB\n3 - Get sku-packages\n4 - Get & Download No Huds\n----------\n")
 
@@ -51,7 +57,13 @@ with open("token.txt") as f:
 
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36 Edg/103.0.1264.44","Authorization":token,"Ubi-AppId":appid,"Content-Type":"application/json"}
 r = requests.post('https://public-ubiservices.ubi.com/v3/profiles/sessions', headers=headers)
-ticket = r.json()["ticket"]
+if r.json()["ticket"]:
+    ticket = r.json()["ticket"]
+else:
+    import time
+    print(f"\n[{r.status_code}] something went wrong while generating a ticket.")
+    time.sleep(5)
+    exit()
 
 if option == 1:
     print("\n\n" + ticket)
