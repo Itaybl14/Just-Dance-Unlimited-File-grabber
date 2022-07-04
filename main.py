@@ -6,7 +6,7 @@ def jdurequest(link):
     json = j.json()
     return json
 
-print("\n----------\nJust Dance Unlimited tools by Itay\nCredits: Ron (todoraki)\n----------\nOptions:\n1 - Get ticket\n2 - Get SongDB\n3 - Get sku-packages\n4 - Get & Download No Huds\n----------\n")
+print("\n----------\nJust Dance Unlimited tools by Itay\nCredits: Ron (todoroki)\n----------\nOptions:\n1 - Get ticket\n2 - Get SongDB\n3 - Get sku-packages\n4 - Get & Download No Huds\n----------\n")
 
 while True:
     option = int(input("Option => "))
