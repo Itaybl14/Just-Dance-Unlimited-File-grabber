@@ -86,7 +86,7 @@ elif option == 3:
     open(f"output/{jdversion}_sku-packages.json", "w", encoding="utf-8").write(skupackages)
 elif option == 4:
     import os, wget
-    codename = input("\nCodename (with big letters!): ")
+    codename = input("\nCodename (with big letters!) => ")
     print("\n----------")
     nohuds1 = jdurequest(f'https://prod.just-dance.com/content-authorization/v1/maps/{codename}')
     nohuds = nohuds1["urls"]
