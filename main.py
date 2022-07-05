@@ -1,7 +1,7 @@
 import requests
 
 def jdurequest(link):
-    headers = {"X-SkuId":skuid,"Authorization":f"Ubi_v1 {ticket}"}
+    headers = {"X-SkuId":skuid,"Authorization":ticket}
     j = requests.get(link, headers=headers)
     if j.status_code != 200:
         import time
@@ -24,7 +24,7 @@ while True:
 
 while True:
     jdversion = int(input("\nJDVersion (2016-2022) => "))
-    if jdversion == 2016 or 2017 or 2018 or 2019 or 2020 or 2021 or 2022:
+    if jdversion == 2016 or jdversion ==2017 or jdversion ==2018 or jdversion ==2019 or jdversion ==2020 or jdversion ==2021 or jdversion ==2022:
         break
     else:
         print("wrong jdversion!")
@@ -58,7 +58,7 @@ with open("token.txt") as f:
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36 Edg/103.0.1264.44","Authorization":token,"Ubi-AppId":appid,"Content-Type":"application/json"}
 r = requests.post('https://public-ubiservices.ubi.com/v3/profiles/sessions', headers=headers)
 if "ticket" in r.json():
-    ticket = r.json()["ticket"]
+    ticket = "Ubi_v1 "  + r.json()["ticket"]
 else:
     import time
     print(f"\n[{r.status_code}] something went wrong while generating a ticket.")
@@ -68,7 +68,7 @@ else:
 if option == 1:
     print("\n\n" + ticket)
 elif option == 2:
-    if jdversion == 2019 or 2020 or 2021 or 2022:
+    if jdversion == 2019 or jdversion ==2020 or jdversion ==2021 or jdversion ==2022:
         songdburl = jdurequest('https://prod.just-dance.com/songdb/v2/songs')["songdbUrl"]
         print("\n----------\nSongDB URL:\n" + songdburl)
         download = input("----------\nDownload? ").lower()
@@ -80,7 +80,7 @@ elif option == 2:
             pass
     else:
         songdb = str(jdurequest('https://prod.just-dance.com/songdb/v1/songs')).replace("'", '"')
-        open(f"output/{jdversion}_songdb.json", "w", encoding="utf-8").write(songdb)    
+        open(f"output/{jdversion}_songdb.json", "w", encoding="utf-8").write(songdb)  
 elif option == 3:
     skupackages = str(jdurequest('https://prod.just-dance.com/packages/v1/sku-packages')).replace("'", '"')
     open(f"output/{jdversion}_sku-packages.json", "w", encoding="utf-8").write(skupackages)
